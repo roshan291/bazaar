@@ -1,9 +1,15 @@
 import React from 'react';
+import CreateLead from './components/lead/create_Lead';
+import ManageLead from './components/lead/manage_Lead';
+import NavigationBar from './components/navigation';
 
 function App() {
   return (
-    <div className="page">
-        <h1>Test page</h1>
+    <div className="page"> 
+    <NavigationBar />
+        {/* <CreateLead /> */}
+        <ManageLead />
+        
     </div>
   );
 }
