@@ -134,7 +134,7 @@ const CreateNewCustomer = (props: any) => {
             <Form.Group as={Col} md="4" controlId="validationCustom">
               <br />
               <Form.Label>Country</Form.Label>
-              <CustomDropdown required = {true} value = {country} onChange = {handleOnChangeCreateNewCustomer} name = "country" dropdownData = {selectCountries} />
+              <CustomDropdown placeholder = "Select Country" required = {true} value = {country} onChange = {handleOnChangeCreateNewCustomer} name = "country" dropdownData = {selectCountries} />
             </Form.Group>
 
             <Form.Group as={Col} md="4" controlId="validationCustom">

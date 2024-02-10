@@ -3,10 +3,10 @@ import Form from 'react-bootstrap/esm/Form';
 import { pleaseSelect } from '../constants';
 
 const CustomDropdown = (props: any) => {
-  const { value, onChange, name, dropdownData, required } = props; 
+  const { value, onChange, name, dropdownData, required, placeholder } = props; 
   return (
     <Form.Select required = {required} value={value} onChange={onChange} name={name} >
-        <option value="" defaultValue = "">{pleaseSelect}</option>
+        <option value="" defaultValue = "">{!placeholder ? pleaseSelect : placeholder }</option>
         {
           dropdownData?.map((item: any, index: any) => <option value={item} key = {index}>{item}</option>)
         }

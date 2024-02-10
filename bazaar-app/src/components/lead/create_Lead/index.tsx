@@ -230,14 +230,7 @@ console.log("createLead", createLead);
 
     <CreateServiceIncluded show={serviceIncludedModalShow} onHide={() => setServiceIncludedModalShow(false)} />
     <CreateNewCustomer show = {createNewCustomerModalShow} onHide={() => setCreateNewCustomerModalShow(false)} />
- 
-    {/* <CustomDatePicker required = {false} value = {startDate} onChange = {handleChangeLead} name = "startDate" minDate = {new Date().toISOString().split("T")[0]} />
 
-    <CustomDropdown required = {false} value = {getRequirement} onChange = {handleChangeLead} name = "getRequirement" dropdownData = {selectRequirement} />
-
-    <CustomTextInput required = {false} value = {leadTitle} onChange = {handleChangeLead} name = "leadTitle" />
-
-    <CustomeTextarea value = {shortNote} onChange = {handleChangeLead} name = "shortNote" /> */}
     <div>
       <CopyLineIcon />
       <Container>

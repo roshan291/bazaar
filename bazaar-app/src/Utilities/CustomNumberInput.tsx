@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/esm/Form';
 import { pleaseEnterNumber } from '../constants';
 
 const CustomNumberInput = (props: any) => {
-  const { value, onChange, name, required, onKeyPress } = props; 
+  const { value, onChange, name, required, onKeyPress, placeholder } = props; 
   return (
     <Form.Control
         required = {required}

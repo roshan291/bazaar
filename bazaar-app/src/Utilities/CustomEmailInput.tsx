@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/esm/Form';
 import { pleaseEnterEmail } from '../constants';
 
 const CustomEmailInput = (props: any) => {
-  const { value, onChange, name, required } = props; 
+  const { value, onChange, name, required, placeholder} = props; 
   const [isValidEmail, setIsValidEmail] = React.useState(true);
 
   const validateEmail = (value: any) => { 

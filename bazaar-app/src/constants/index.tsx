@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardList, faFileLines, faFileCircleXmark, faSquarePen, faFileMedical, faNoteSticky, faFileImage, faSquareH, faHotel, faClipboard, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
-export const pleaseSelect = "Please select";
+export const pleaseSelect = "- Please select -";
 export const startDate = "Start Date";
 export const endDate = "End Date";
 export const pleaseEnterText = "Please enter text";
@@ -19,6 +19,10 @@ export const selectRequirement = [
     "Visa",
 ];
 
+export const dropdownPlaceholder = {
+    selectCountry: "Select Country",
+}
+
 export const leadStatus = [
     "All",
     "New",
@@ -27,6 +31,14 @@ export const leadStatus = [
     "Confirmed",
     "Completed",
     "Cancelled", 
+]
+
+export const itineraryStatus = [
+    "In process",
+    "Completed Tour",
+    "Sent to customer",
+    "Confirmed",
+    "Rejected / Cancel",
 ]
 
 export const changeLeadStatus = [
@@ -59,6 +71,39 @@ export const createNewCustomer = [
 export const selectCouple = [
     "Per Person",
     "Couple"
+]
+
+export const selectWelcomeNote = [
+    "Welcome Note 1",
+    "Welcome Note 2",
+    "Welcome Note 3",
+    "Welcome Note 4",
+    "Welcome Note 5",
+    "Welcome Note 6",
+    "Welcome Note 7",
+    "Welcome Note 8",
+    "Welcome Note 9",
+    "Welcome Note 10", 
+]
+
+export const selectThankyouNote = [
+    "Thankyou Note 1",
+    "Thankyou Note 2",
+    "Thankyou Note 3",
+    "Thankyou Note 4",
+    "Thankyou Note 5",
+    "Thankyou Note 6",
+    "Thankyou Note 7",
+    "Thankyou Note 8",
+    "Thankyou Note 9",
+    "Thankyou Note 10", 
+]
+
+export const selectMeal = [
+    "Breakfast",
+    "Lunch",
+    "Dinner",
+    "Evening Snacks",
 ]
 
 export const leadsChild = ["Create New Lead", "Manage Leads"];

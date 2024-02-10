@@ -67,6 +67,58 @@ body {
   color: #fff !important;
 }
 
-.dropdown-toggle.nav-link {
+.custom_label_color, label.form-label {
+  color: #979797 !important;
+}
 
+.itinerary_carousel_action {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0,0,0,0.4);
+  left: 0;
+  right: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+  border-radius: 5px;
+}
+
+.tab-content {
+  background-color: #fff;
+  padding: 25px 16px;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.reqiored {
+  color: red;
+}
+
+.tab_default_style {
+  background-color: #0d6efd;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+    0%  {box-shadow: 20px 0 #000, -20px 0 #0002;background: #000 }
+    33% {box-shadow: 20px 0 #000, -20px 0 #0002;background: #0002}
+    66% {box-shadow: 20px 0 #0002,-20px 0 #000; background: #0002}
+    100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
 }

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquarePlus, faAngleUp, faXmark, faExpand, faAngleDown, faCheck, faMinimize, faMaximize} from '@fortawesome/free-solid-svg-icons';
 import ManageLeadSideNavMore from '../../../Utilities/ManageLeadSideNavMore';
 import UpdateLeadStatus from '../../../Utilities/UpdateLeadStatus';
+import Collapse from 'react-bootstrap/Collapse';
 
 const ManageLead = () => {
   const [activeStatus, setActiveStatus] = useState<string>("All");
@@ -24,6 +25,7 @@ const ManageLead = () => {
   const [managedleadDefaultViewMore, setmanagedleadDefaultViewMore] = useState(false);
 
   const [chnageLeadStatusModalshow, setChnageLeadStatusModalShow] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleLeadStatusChangeClose = () => setChnageLeadStatusModalShow(false);
   const handleLeadStatusChangeShow = (title: any) => {
@@ -103,7 +105,7 @@ const ManageLead = () => {
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Control type="email" placeholder="Search..." />
             </Form.Group>
-        </Form>
+           </Form>
         </Col>
         </Row>
       </Container>
@@ -173,22 +175,26 @@ const ManageLead = () => {
             <Col xs lg="6"><label><span>For</span> Venkatesh | <span>Travelling</span> 02 Aug 2023 | <span>New Since</span> (186 Days)</label></Col>
             <Col xs lg="6" style = {{textAlign: "right"}}><label><span>Manage by</span> Venkatesh</label></Col>
           </Row>
-          {
-            activeForMenu ? <Container><Row className={styles.manageSideNavModal}>
-              {
-                  manageLeadSideNavMoreList?.map((navList: any, index: any) => 
-                  <Col xs={6} md={4} key = {index}>
-                      { navList?.navTitle === "Change Lead Status" ? <h6 
-                        onClick = {() => handleLeadStatusChangeShow(navList?.navTitle)}>
-                        <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
-                      </h6> : navList?.navTitle === "Remove Lead" ? <h6 
-                        onClick = {() => handleLeadStatusChangeShow(navList?.navTitle)}>
-                        <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
-                      </h6> : <h6><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> }
-                  </Col> )
-              }
-            </Row> </Container> : <></>
-          }
+           
+          <Collapse in={activeForMenu}>
+              <Container>
+                <Row className={styles.manageSideNavModal}>
+                {
+                    manageLeadSideNavMoreList?.map((navList: any, index: any) => 
+                    <Col xs={6} md={4} key = {index}>
+                        { navList?.navTitle === "Change Lead Status" ? <h6 
+                          onClick = {() => handleLeadStatusChangeShow(navList?.navTitle)}>
+                          <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
+                        </h6> : navList?.navTitle === "Remove Lead" ? <h6 
+                          onClick = {() => handleLeadStatusChangeShow(navList?.navTitle)}>
+                          <span>{navList.icon} &nbsp;</span>{navList?.navTitle}
+                        </h6> : <h6><span>{navList.icon} &nbsp;</span>{navList?.navTitle}</h6> }
+                    </Col> )
+                }
+                </Row> 
+              </Container>
+          </Collapse>
+
           <Row className={styles.selectedListContent}>
               { managedleadDefaultViewMore ? <></> : <Col xs={12} md={12}>
                 <ul>
