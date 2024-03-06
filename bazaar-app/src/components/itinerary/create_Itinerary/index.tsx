@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from "./create_itinerary.module.css";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -6,7 +6,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import { itineraryDefaultConstant } from '../constants';
 import CustomTextInput from '../../../Utilities/CustomTextInput';
 import CustomDropdown from '../../../Utilities/CustomDropdown';
-import { itineraryStatus, selectCountries, selectCouple, selectCurrency, selectThankyouNote, selectTypeOfHoliday, selectWelcomeNote } from '../../../constants';
+import { itineraryStatus, selectCouple, selectCurrency, selectThankyouNote, selectTypeOfHoliday, selectWelcomeNote } from '../../../constants';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import CustomDatePicker from '../../../Utilities/CustomDatePicker';
 import CustomNumberInput from '../../../Utilities/CustomNumberInput';
@@ -15,7 +15,7 @@ import CustomEmailInput from '../../../Utilities/CustomEmailInput';
 import CustomeTextarea from '../../../Utilities/CustomeTextarea';
 import Stack from 'react-bootstrap/Stack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faEnvelope, faCircleArrowUp, faTrashCan, faTag, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faEnvelope, faCircleArrowUp, faTrashCan, faTag, faPlus, faPenToSquare, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useId } from 'react';
@@ -26,6 +26,7 @@ import HotelCheckout from '../../../pages/itinerary/hotelCheckout';
 import Sightseeing from '../../../pages/itinerary/sightseeing';
 import Hotel from '../../../pages/itinerary/hotel';
 import NextDay from '../../../pages/itinerary/addNextDay';
+import { selectCountries } from '../../../constants/countries';
 
 const CreateItinerary = () => {
     const [validated, setValidated] = useState(false);
@@ -39,7 +40,20 @@ const CreateItinerary = () => {
     const [openHotelCheckout, setOpenHotelCheckout] = React.useState(false);
     const [openSightseeing, setOpenSightseeing] = React.useState(false);
 
-    const [nextDayData, setNextDayData] = React.useState([] as any);
+    const [nextDayData, setNextDayData] = React.useState("" as any);
+    const [daydescription, setDayDescription] = React.useState([] as any);
+    const [dayMeal, setDayMeal] = React.useState([] as any);
+    const [dayTransportation, setDayTransportation] = React.useState([] as any);
+    const [dayHotel, setDayHotel] = React.useState([] as any);
+    const id = useId()
+
+    const [dayDescriptionSelectedItemID, setDdayDescriptionSelectedItemID] = useState(Number);
+    const [dayMealSelectedItemID, setDdayMealSelectedItemID] = useState(Number);
+    const [dayNextDaySelectedItemID, setDayNextDaySelectedItemID] = useState(Number);
+    const [dayAddOwnHotelSelectedItemID, setDayAddOwnHotelSelectedItemID] = useState(Number);
+    const [dayTransportationSelectedID, setDayTransportationSelectedID] = useState(Number);
+    const [daySighseeingSelectedID, setDdaySighseeingSelectedID] = useState(Number);
+    const [dayHotelSelectedID, setDdayHotelSelectedID] = useState(Number);
 
     // sightseeing
 
@@ -93,7 +107,8 @@ const CreateItinerary = () => {
         tips: "",
         otherVisaInformation: "",
         thankyounote: "",
-        changestatus: ""
+        changestatus: "",
+        dayWisePlanFinal: [],
     })
 
     const {
@@ -128,8 +143,8 @@ const CreateItinerary = () => {
         termsConditions,
         tips,
         otherVisaInformation,
-        thankyounote,
-        changestatus,
+        thankyounote, 
+        changestatus, 
     } = createItinerary;
     
 
@@ -143,7 +158,7 @@ const CreateItinerary = () => {
         //   axios.post(`http://localhost:8001/createLead`, createLead).then((response: any) => {
          console.log("onAddCustomerSubmit")
         // })
-          console.log("handleSubmit");
+          console.log("handleSubmit", createItinerary);
           // handleClose();
           // history("/lead-board/supervise")
         }
@@ -181,7 +196,7 @@ const CreateItinerary = () => {
 
   const addPlan = {
     id: addDayCount,
-    day: `Day ${addDayCount} | 3 Aug, 2023 (Thu)`, 
+    day: nextDayData, 
     description: [],
     transportation: [],
     hotel: [],
@@ -190,45 +205,124 @@ const CreateItinerary = () => {
     meal: [],
   }
 
-   const addWisePlan = () => {
-    // console.log("Roshan clicked on next day");
-    setAddDayCount(addDayCount + 1)
+  useEffect(() => {
     setDayWisePlan([...dayWisePlan, addPlan])
+  }, [nextDayData])
+
+//   useEffect(() => {
+//   const dayWisePlanFilter = dayWisePlan.find((item:any) => item.id === dayDescriptionSelectedItemID);
+//   dayWisePlanFilter?.description.push(daydescription);
+//   setDayWisePlan([...dayWisePlan])
+//   }, [daydescription])
+
+useEffect(() => {
+    const dayWisePlanFilter = dayWisePlan.find((item:any) => item.id === dayDescriptionSelectedItemID);
+    if (dayWisePlanFilter) {
+      const updatedDescription = dayWisePlanFilter.description.concat(daydescription);
+      const updatedDayWisePlan = dayWisePlan.map((item: any) => {
+        if (item.id === dayDescriptionSelectedItemID) {
+          return { ...item, description: updatedDescription };
+        }
+        return item;
+      });
+      setDayWisePlan(updatedDayWisePlan);
+    }
+  }, [daydescription]);
+
+  useEffect(() => {
+    const dayWisePlanFilter = dayWisePlan.find((item:any) => item.id === dayMealSelectedItemID);
+    if (dayWisePlanFilter) {
+      const updatedMeal = dayWisePlanFilter.meal.concat(dayMeal);
+      const updatedDayWisePlan = dayWisePlan.map((item: any) => {
+        if (item.id === dayMealSelectedItemID) {
+          return { ...item, meal: updatedMeal };
+        }
+        return item;
+      });
+      setDayWisePlan(updatedDayWisePlan);
+    }
+  }, [dayMeal]);
+
+  useEffect(() => {
+    const dayWisePlanFilter = dayWisePlan.find((item:any) => item.id === dayTransportationSelectedID);
+    if (dayWisePlanFilter) {
+      const updatedTrasportation = dayWisePlanFilter.transportation.concat(dayTransportation);
+      const updatedDayWisePlan = dayWisePlan.map((item: any) => {
+        if (item.id === dayTransportationSelectedID) {
+          return { ...item, transportation: updatedTrasportation };
+        }
+        return item;
+      });
+      setDayWisePlan(updatedDayWisePlan);
+    }
+  }, [dayTransportation]);
+
+  useEffect(() => {
+    const dayWisePlanFilter = dayWisePlan.find((item:any) => item.id === dayHotelSelectedID);
+    if (dayWisePlanFilter) {
+      const updatedHotel = dayWisePlanFilter.hotel.concat(dayHotel);
+      const updatedDayWisePlan = dayWisePlan.map((item: any) => {
+        if (item.id === dayHotelSelectedID) {
+          return { ...item, hotel: updatedHotel };
+        }
+        return item;
+      });
+      setDayWisePlan(updatedDayWisePlan);
+    }
+  }, [dayHotel]);
+
+    useEffect(() => {
+        setCreateItinerary(prevState => ({
+            ...prevState,
+            dayWisePlanFinal: dayWisePlan
+        }));
+    }, [dayWisePlan]);
+
+
+   const addWisePlan = () => {
+    setAddDayCount(addDayCount + 1)
+    // setDayWisePlan([...dayWisePlan, addPlan])
     setOpeNextDay(true)
    }
 
    console.log("Roshan clicked on next day", dayWisePlan);
 
     const handleAddDayDescription = (selectedItem: any) => {
+        setDdayDescriptionSelectedItemID(selectedItem)
         setOpenDescription(true)
     }
     const handleAddTransportation = (selectedItem: any) => {
+        setDayTransportationSelectedID(selectedItem)
         setOpenTransportation(true)
     }
     const handleAddHotel = (selectedItem: any) => {
+        setDdayHotelSelectedID(selectedItem)
         setOpenHotel(true)
     }
     const handleAddCheckoutHotel = (selectedItem: any) => {
+         setDdayDescriptionSelectedItemID(selectedItem)
         setOpenHotelCheckout(true)
     }
     const handleAddSightseeing = (selectedItem: any) => {
+        setDdaySighseeingSelectedID(selectedItem)
         setOpenSightseeing(true)
     } 
     const handleAddMealFood = (selectedItem: any) => {
+        setDdayMealSelectedItemID(selectedItem)
         setOpenMeal(true);
     }
 
   return (
 <>
     <NextDay show = {opeNextDay} onHide = {() => setOpeNextDay(false)} getnextDayData = {setNextDayData}/>
-    <Meal show = {openMeal} onHide = {() => setOpenMeal(false)} />
-    <Description show = {openDescription} onHide = {() => setOpenDescription(false)} />
-    <Transportation show = {openTransportation} onHide = {() => setOpenTransportation(false)} />
+    <Meal show = {openMeal} onHide = {() => setOpenMeal(false)} getDayMeal = {setDayMeal}/>
+    <Description show = {openDescription} onHide = {() => setOpenDescription(false)} getDayDescription = {setDayDescription}/>
+    <Transportation show = {openTransportation} onHide = {() => setOpenTransportation(false)} getDayTransportation = {setDayTransportation}/>
     <HotelCheckout show = {openHotelCheckout} onHide = {() => setOpenHotelCheckout(false)} />
     <Sightseeing show = {openSightseeing} onHide = {() => setOpenSightseeing(false)} />
-    <Hotel show = {openHotel} onHide = {() => setOpenHotel(false)} />
+    <Hotel show = {openHotel} onHide = {() => setOpenHotel(false)} getDayHotel = {setDayHotel}/>
 
-    <Container className={styles.create_itinerary_page}>
+    <Container className={`${styles.create_itinerary_page} manage_top_view`}>
          <Container className="mb-3">
             <Row className='d-flex align-items-center justify-content-center'>
                 <Col><h5 className='mb-0'>YOUR TOUR ITINERARY </h5></Col>
@@ -247,7 +341,7 @@ const CreateItinerary = () => {
                 <Row>
                     <Col sm="4">
                         <Form.Group className="mb-1" controlId="Itinerary Title">
-                            <Form.Label column className='d-flex align-items-start justify-content-start'>Itinerary Title<span className='reqiored'>*</span></Form.Label>
+                            <Form.Label column className='d-flex align-items-start justify-content-start'>Itinerary Title<span className='required'>*</span></Form.Label>
                             <Col>
                                 <CustomTextInput required = {false} value = {itineraryTitle} onChange = {handleChangeItinerary} name = "itineraryTitle" />
                             </Col>
@@ -263,7 +357,7 @@ const CreateItinerary = () => {
                     </Col>
                     <Col sm="4">
                         <Form.Group className="mb-1" controlId="Itinerary Title">
-                            <Form.Label column className='d-flex align-items-start justify-content-start'>Type of Holidays<span className='reqiored'>*</span></Form.Label>
+                            <Form.Label column className='d-flex align-items-start justify-content-start'>Type of Holidays<span className='required'>*</span></Form.Label>
                             <Col>
                             <CustomDropdown required = {true} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
                             </Col>
@@ -474,10 +568,150 @@ const CreateItinerary = () => {
                  
                 <div className={styles.daywise_block_main_wrapper}>     
                     {
-                        dayWisePlan?.map((item:any, index: any) => <div key = {item.index} className={styles.daywise_block_wrapper}>
-                        
+                        dayWisePlan?.filter((item: any) => item.day !== "").map((item:any, index: any) => <div key = {item.index} className={styles.daywise_block_wrapper}>
                         <Row>
-                            <Col sm="10"><div className={styles.dayPlanCount}>{item.day}</div></Col>
+                            <Col sm="10">
+                                {/* {JSON.stringify(item)} */}
+                                <div className={styles.dayPlan}>{item?.day} <FontAwesomeIcon icon={faPenToSquare} /></div>
+                                <div className={styles.dayDescription}>
+                                    {
+                                        item?.description?.map((description: any) => <>
+                                            <label><strong>{description?.dayTitleText}</strong></label>
+                                            <p>{description?.dayDescriptionText}</p>
+                                        </>)
+                                    }
+                                </div>
+                                <div className={styles.dayMeal}>
+                                    {
+                                        item?.meal?.map((meal: any) => <>
+                                            <label><strong>{meal?.mealTitle}</strong></label>
+                                            <p>{meal?.mealDescription}</p>
+                                            <ul>
+                                                {
+                                                    meal?.selecdtMeal?.filter((check: any) => check.isChecked === true).map((list: any) => <li><FontAwesomeIcon icon={faCircleCheck} /> {list.selectMealType}</li>)
+                                                }
+                                            </ul>
+                                        </>)
+                                    }
+                                </div>
+                                <div className={styles.dayTransportation}>
+                                    {
+                                        item?.transportation?.map((transport: any) => <>
+                                            <Row>
+                                                <Col>
+                                                    <div>
+                                                        <span className='custom_label_color'>Transportation Title</span>
+                                                        <label>{transport?.transportationTitle}</label>
+                                                    </div>
+                                                    <div className="line_devider_inside"></div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Departing Country</span>
+                                                        <label>{transport?.departingCountry}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Departing City</span>
+                                                        <label>{transport?.departingCity}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Starting Point</span>
+                                                        <label>{transport?.startingPoint}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>DepartDate</span>
+                                                        <label>{transport?.departDate}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Actual Departure Time</span>
+                                                        <label>{transport?.actualDepartureTime}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Reporting Time</span>
+                                                        <label>{transport?.reportingTime}</label>
+                                                    </div>
+                                                    
+                                                </Col>
+                                                <Col>
+                                                    <div>
+                                                        <span className='custom_label_color'>Transpotation Mode</span>
+                                                        <label>{transport?.transpotationMode}</label>
+                                                    </div>
+                                                    <div className="line_devider_inside"></div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Arrival Country</span>
+                                                        <label>{transport?.arrivalCountry}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Arrival City</span>
+                                                        <label>{transport?.arrivalCity}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Ending Point</span>
+                                                        <label>{transport?.endingPoint}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Arrial Date</span>
+                                                        <label>{transport?.arrialDate}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Actual Arrival Time</span>
+                                                        <label>{transport?.actualArrivalTime}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Transpotation Note</span>
+                                                        <label>{transport?.transpotationNote}</label>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </>)
+                                    }
+                                </div>
+                                <div className={styles.dayHotel}>
+                                    {
+                                        item?.hotel?.map((motal: any) => <>
+                                            <Row>
+                                                <Col>
+                                                    <div>
+                                                        <span className='custom_label_color'>CheckIn Date: </span>
+                                                        <label>{motal?.checkInDate}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>CheckIn Time: </span>
+                                                        <label>{motal?.checkInTime}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Number Of Nights: </span>
+                                                        <label>{motal?.numberOfNights}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Adults: </span>
+                                                        <label>{motal?.adults}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Rooms: </span>
+                                                        <label>{motal?.rooms}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Childs: </span>
+                                                        <label>{motal?.childs}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Extra bed: </span>
+                                                        <label>{motal?.extrabed}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Room Types: </span>
+                                                        <label>{motal?.roomTypes}</label>
+                                                    </div>
+                                                    <div>
+                                                        <span className='custom_label_color'>Note: </span>
+                                                        <label>{motal?.noteText}</label>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </>)
+                                    }
+                                </div>
+                            </Col>
                             <Col sm="2" className='d-flex align-items-center justify-content-sm-end'>
                             <DropdownButton size="sm" id="dropdown-basic-button" variant="outline-danger" title="+ Add Plan">
                                 <Dropdown.Item onClick={() => handleAddDayDescription(item.id)}><FontAwesomeIcon icon={faTag} /> Day Description</Dropdown.Item>

@@ -5,7 +5,7 @@ import CustomDatePicker from '../../../Utilities/CustomDatePicker';
 import CustomTextInput from '../../../Utilities/CustomTextInput';
 import CustomeTextarea from '../../../Utilities/CustomeTextarea';
 
-import { createNewCustomer, selectHotelPreferences, modeOfPayment, selectCouple, selectCurrency, selectRequirement, selectRequirementDefault, selectServiceIncluded, selectTypeOfHoliday, selectVehicleType, selectCountries } from '../../../constants';
+import { createNewCustomer, selectHotelPreferences, modeOfPayment, selectCouple, selectCurrency, selectRequirement, selectRequirementDefault, selectServiceIncluded, selectTypeOfHoliday, selectVehicleType } from '../../../constants';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/esm/Form';
@@ -22,9 +22,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDataRequest } from '../../../store/actions/createNewCustomer';
 import CustomToast from '../../../Utilities/CustomToast';
 import CustomCustomerDropdown from '../../../Utilities/CustomCustomerDropdown.';
-import CopyLineIcon from "../../../assets/icons/copy-line-icon.svg";
+// import CopyLineIcon from "../../../assets/icons/copy-line-icon.svg";
 
 import axios from 'axios';
+import { selectCountries } from '../../../constants/countries';
 // import { useNavigate } from 'react-router-dom';
 
 const CreateLead = () => {
@@ -231,8 +232,8 @@ console.log("createLead", createLead);
     <CreateServiceIncluded show={serviceIncludedModalShow} onHide={() => setServiceIncludedModalShow(false)} />
     <CreateNewCustomer show = {createNewCustomerModalShow} onHide={() => setCreateNewCustomerModalShow(false)} />
 
-    <div>
-      <CopyLineIcon />
+    <div className='manage_top_view'>
+      {/* <CopyLineIcon /> */}
       <Container>
         <Row className={styles.lead_wrapper}>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>

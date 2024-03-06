@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link, NavLink } from 'react-router-dom'
 
-import { helpChild, invoiceChild, itineraryChild, leadsChild, navigationConstant, toolsChild } from "../../constants"
+import { helpChild, invoiceChild, itineraryChild, leadsChild, navigationConstant, navigationURL, toolsChild } from "../../constants"
 import styles from "./navigation.module.css"
 import OutsideClick from "../../Utilities/outsideClick";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,6 +17,18 @@ const NavigationBar = () => {
     // const boxRef = useRef(null);
     // const boxOutsideClick = OutsideClick(boxRef)
     const [selectNav, setSelectNav] = useState('Dashboard' as any)
+
+    const {
+        createLead,
+        manageLead,
+        dashboard,
+        customisedItinerary,
+        groupItinerary,
+        readyItinerary,
+        propormainvoice,
+        invoice,
+        customerView,
+    } = navigationURL;
     return (
        <>
         
@@ -24,75 +37,26 @@ const NavigationBar = () => {
       </div> */}
        <Navbar className={`${styles.navbarWrapper} bg-body-tertiary`} bg="primary" >
       <Container fluid>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand><Link to={dashboard}>Logo</Link></Navbar.Brand>
         <Nav className={styles.navigationWrapper}>
-            {/* <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-            {/* onMouseLeave={() => setSelectNav("")} onMouseEnter={() => setSelectNav(nav)} */}
-            {/* <ul className={styles.navigationWrapper}>
-                {
-                    navigationConstant?.map((nav: any, index: any) => <>
-                    <li className={selectNav === nav ? styles.activemenu : ""} key={index}
-                    onClick={() => setSelectNav(nav)}>{nav} <FontAwesomeIcon icon={faAngleUp} /> </li>
-                    </>)
-                }
-            </ul> */}
-                {/* {
-                    selectNav === "Leads" ? <ul className={styles.leadChildMenu}> 
-                    {
-                        leadsChild.map((list: any) => <li>{list}</li>)
-                    }
-                    </ul> : null
-                }
-                { 
-                    selectNav === "My Itinerary" ? <ul className={styles.itineraryChildMenu}> 
-                    {
-                        itineraryChild.map((list: any) => <li>{list}</li>)
-                    }
-                    </ul> : null 
-                }
-                { 
-                    selectNav === "Customer & Billing" ? <ul className={styles.invoiceChildMenu}> 
-                    {
-                        invoiceChild.map((list: any) => <li>{list}</li>)
-                    }
-                    </ul> : null}
-                { 
-                    selectNav === "Tools" ? <ul className={styles.toolsChildMenu}> 
-                    {
-                        toolsChild.map((list: any) => <li>{list}</li>)
-                    }
-                    </ul> : null
-                }
-                { selectNav === "Help" ? <ul className={styles.helpChildMenu}> 
-                    {
-                        helpChild.map((list: any) => <li>{list}</li>)
-                    }
-                    </ul> : null 
-                } */}
-                <Nav.Link href="#action2">Dashboard</Nav.Link>
+                <Nav.Link><Link to={dashboard}>Dashboard</Link></Nav.Link>
                 <NavDropdown title="Lead" id="">
-                    <NavDropdown.Item href="#action3">Create new lead</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                        Manage leads
+                    <NavDropdown.Item><Link to={createLead}>Create new lead</Link></NavDropdown.Item>
+                    <NavDropdown.Item>
+                        <Link to={manageLead}>Manage leads</Link>
                     </NavDropdown.Item>
-                    {/* <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                        Something else here
-                    </NavDropdown.Item> */}
                 </NavDropdown>
                 <NavDropdown title="My Itinerary" id="">
-                    <NavDropdown.Item>Customized Itinerary</NavDropdown.Item>
-                    <NavDropdown.Item>Group Itinerary</NavDropdown.Item>
+                    <NavDropdown.Item><Link to={customisedItinerary}>Customized Itinerary</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link to={groupItinerary}>Group Itinerary</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item>Ready Itinerary</NavDropdown.Item>
+                    <NavDropdown.Item><Link to={readyItinerary}>Ready Itinerary</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Customer & Billing" id="">
-                    <NavDropdown.Item>Invoice</NavDropdown.Item>
-                    <NavDropdown.Item>Proforma Invoice</NavDropdown.Item>
+                    <NavDropdown.Item><Link to={invoice}>Invoice</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link to={propormainvoice}>Proforma Invoice</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item>My Customers</NavDropdown.Item>
+                    <NavDropdown.Item><Link to={customerView}>My Customers</Link></NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="#action2">Hotels</Nav.Link>
                 <NavDropdown title="Tools" id="">

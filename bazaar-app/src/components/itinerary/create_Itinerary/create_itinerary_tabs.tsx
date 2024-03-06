@@ -6,13 +6,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import { itineraryDefaultConstant } from '../constants';
 import CustomTextInput from '../../../Utilities/CustomTextInput';
 import CustomDropdown from '../../../Utilities/CustomDropdown';
-import { selectCountries, selectCouple, selectCurrency, selectThankyouNote, selectTypeOfHoliday, selectWelcomeNote } from '../../../constants';
+import { selectCouple, selectCurrency, selectThankyouNote, selectTypeOfHoliday, selectWelcomeNote } from '../../../constants';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import CustomDatePicker from '../../../Utilities/CustomDatePicker';
 import CustomNumberInput from '../../../Utilities/CustomNumberInput';
 import { onKeyPress } from '../../../Utilities/Utils';
 import CustomEmailInput from '../../../Utilities/CustomEmailInput';
 import CustomeTextarea from '../../../Utilities/CustomeTextarea';
+import { selectCountries } from '../../../constants/countries';
 
 const CreateItinerary = () => {
     const [validated, setValidated] = useState(false);
@@ -178,7 +179,7 @@ const CreateItinerary = () => {
                             nav === "Summary" ? <>
                             <Row>                       
                                 <Form.Group as={Row} className="mb-3" controlId="Itinerary Title">
-                                    <Form.Label column sm="2" className='d-flex align-items-end justify-content-end'>Itinerary Title<span className='reqiored'>*</span></Form.Label>
+                                    <Form.Label column sm="2" className='d-flex align-items-end justify-content-end'>Itinerary Title<span className='required'>*</span></Form.Label>
                                     <Col sm="6">
                                         <CustomTextInput required = {false} value = {itineraryTitle} onChange = {handleChangeItinerary} name = "itineraryTitle" />
                                     </Col>
@@ -190,7 +191,7 @@ const CreateItinerary = () => {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} className="mb-3" controlId="Itinerary Title">
-                                    <Form.Label column sm="2" className='d-flex align-items-end justify-content-end'>Type of Holidays<span className='reqiored'>*</span></Form.Label>
+                                    <Form.Label column sm="2" className='d-flex align-items-end justify-content-end'>Type of Holidays<span className='required'>*</span></Form.Label>
                                     <Col sm="6">
                                     <CustomDropdown required = {true} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
                                     </Col>

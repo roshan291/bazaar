@@ -2,7 +2,7 @@ import React from 'react'
 
 const PropormaInvoice = () => {
   return (
-    <div>PropormaInvoice</div>
+    <div className='manage_top_view'>PropormaInvoice</div>
   )
 }
 

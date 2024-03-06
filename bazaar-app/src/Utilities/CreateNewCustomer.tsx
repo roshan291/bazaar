@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'; 
 import CustomEmailInput from './CustomEmailInput';
 import CustomDropdown from './CustomDropdown';
-import { selectCountries } from '../constants';
+import { selectCountries } from '../constants/countries';
 import CustomNumberInput from './CustomNumberInput';
 import { onKeyPress } from './Utils';
 import axios from 'axios';

@@ -98,7 +98,7 @@ body {
   border-bottom-left-radius: 8px;
 }
 
-.reqiored {
+.required {
   color: red;
 }
 
@@ -121,4 +121,20 @@ body {
     33% {box-shadow: 20px 0 #000, -20px 0 #0002;background: #0002}
     66% {box-shadow: 20px 0 #0002,-20px 0 #000; background: #0002}
     100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
+}
+
+.modal-90w {
+  width: 90% !important;
+  max-width: none !important;
+}
+
+.modal-95w {
+  width: 95% !important;
+  max-width: none !important;
+  height: 80%;
+  overflow-y: auto;
+}
+
+.manage_top_view {
+  margin-top: 70px;
 }

@@ -12,6 +12,7 @@ import CustomDatePicker from '../../Utilities/CustomDatePicker';
 const NextDay = (props: any) => {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [daysList, setDaysList] = useState([] as any);
 
   useEffect(() => {
     setShow(props?.show)
@@ -45,11 +46,14 @@ const onSubmitCreateNewDay = (event: any) => {
       console.log("All date Not Verified handleCreateNewCustomer");
       event.stopPropagation();
     } else {
-      console.log("onSubmitCreateNewDay", daySelect) ;
-      props?.getnextDayData(daySelect)
+      // console.log("onSubmitCreateNewDay", daySelect) ;
+       props?.getnextDayData(`${dayTitle} | ${dayDate}`)
+
+      // setDaysList([...daysList, daySelect]);  
+      // props?.getnextDayData([...daysList, daySelect]); 
+      setDaySelect({ dayTitle: "", dayDate: "" }); 
     }
 }
-,=
   return (
     <>
      <Modal
@@ -68,13 +72,13 @@ const onSubmitCreateNewDay = (event: any) => {
             <Row>
             <Col xs={12} md={6}>
                 <Form.Group as={Col} controlId="validationCustom">
-                    <Form.Label>Title<span className='reqiored'>*</span></Form.Label>
+                    <Form.Label>Title<span className='required'>*</span></Form.Label>
                     <CustomTextInput required = {true} value = {dayTitle} onChange = {handleChangeDaySelect} name = "dayTitle" />
                 </Form.Group> 
             </Col>
             <Col xs={23} md={6}>
                 <Form.Group as={Col} controlId="validationCustom">
-                    <Form.Label>Date<span className='reqiored'>*</span></Form.Label>
+                    <Form.Label>Date<span className='required'>*</span></Form.Label>
                     <CustomDatePicker required = {true} value = {dayDate} onChange = {handleChangeDaySelect} name = "dayDate" />
                 </Form.Group> 
             </Col>

@@ -11,7 +11,8 @@ import Col from 'react-bootstrap/esm/Col';
 const Description = (props: any) => {
 
   const [show, setShow] = useState(false); 
-
+  const [validated, setValidated] = useState(false);
+  
     const [dayDescription, setDayDescription] = useState({
         dayTitleText: "",
         dayDescriptionText: "",
@@ -26,10 +27,31 @@ const Description = (props: any) => {
       dayDescriptionText
     } = dayDescription
 
-    const handleChangeDayDescription = () => {
-
+    const handleChangeDayDescription = (e: any) => {
+      const target = e.target;
+      const value = target.value;
+      const name = target.name;
+      setDayDescription({
+        ...dayDescription,
+        [name]: value
+      });
     }
 
+  const onSubmitDayDescription = (event: any) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        console.log("All date Not Verified handleCreateNewCustomer");
+        event.stopPropagation();
+      } else {
+        // console.log("onSubmitCreateNewDay", daySelect) ;
+         props?.getDayDescription([dayDescription])
+  
+        // setDaysList([...daysList, daySelect]);  
+        // props?.getnextDayData([...daysList, daySelect]); 
+        setDayDescription({ dayTitleText: "", dayDescriptionText: "" }); 
+      }
+  }
 
   return (
     <>
@@ -43,7 +65,7 @@ const Description = (props: any) => {
       <Modal.Header closeButton>
         <Modal.Title><h5>Day Description</h5></Modal.Title>
       </Modal.Header>
-      <Form>
+      <Form noValidate validated={validated} onSubmit={onSubmitDayDescription}>
           <Modal.Body>
           <Form.Group as={Col} controlId="validationCustom">
             <Form.Label>Day Title</Form.Label>
@@ -60,7 +82,7 @@ const Description = (props: any) => {
           <Button variant="secondary" onClick={props?.onHide}>
               Close
           </Button>
-          <Button variant="primary">Save</Button>
+          <Button variant="primary" type='submit'>Save</Button>
           </Modal.Footer>
       </Form>
     </Modal>

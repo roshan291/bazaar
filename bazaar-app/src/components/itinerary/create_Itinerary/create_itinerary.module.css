@@ -28,12 +28,15 @@
     /* border: 1px solid red; */
 }
 .daywise_block_wrapper {
-    /* border-left: 4px solid green; */
+    border-left: 2px solid #ddd;
     min-height: 150px;
     position: relative;
+    margin-top: 30px;
+    padding-left: 15px;
+    margin-left: 42px;
 }
 .daywise_block_wrapper:after {
-    content: "";
+    /* content: ""; */
     background-color: #ddd;
     width: 4px;
     height: 75%;
@@ -43,4 +46,47 @@
 .dayPlanCountDelete {
     cursor: pointer;
     margin-left: 15px;
+}
+
+.dayPlan {
+    position: absolute;
+    top: -20px;
+    left: -2px;
+    font-weight: 500;
+}
+
+.dayPlan svg {
+    color: crimson;
+    cursor: pointer;
+}
+
+.dayDescription {
+
+}
+
+.dayMeal ul {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.dayMeal ul li {
+    margin-right: 15px;
+}
+
+.dayMeal ul li svg {
+    color: dodgerblue;
+}
+
+.dayMeal p {
+    margin-bottom: .5rem;
+}
+
+.dayTransportation label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dayHotel {
+    
 }

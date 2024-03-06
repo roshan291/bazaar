@@ -76,7 +76,7 @@ const ManageLead = () => {
       setActiveForMenu(false)
       }} /> */}
       <UpdateLeadStatus show = {chnageLeadStatusModalshow} onHide = {handleLeadStatusChangeClose} selectedItem = {selectedNavItem} />
-    <Container fluid className={styles.managelead_wrapper}>
+    <Container fluid className={`${styles.managelead_wrapper} manage_top_view`}>
       <Container>
         <Row className='align-items-center justify-content-between'>
           {/* <Col xs lg="2"><h6>Manage Leads</h6></Col> */}
