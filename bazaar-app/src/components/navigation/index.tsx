@@ -1,11 +1,10 @@
-import React, {useState, useRef} from "react"
+import React, {useState, useEffect} from "react"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, NavLink } from 'react-router-dom'
-
 import { helpChild, invoiceChild, itineraryChild, leadsChild, navigationConstant, navigationURL, toolsChild } from "../../constants"
 import styles from "./navigation.module.css"
 import OutsideClick from "../../Utilities/outsideClick";
@@ -14,10 +13,51 @@ import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const NavigationBar = () => {
-    // const boxRef = useRef(null);
-    // const boxOutsideClick = OutsideClick(boxRef)
     const [selectNav, setSelectNav] = useState('Dashboard' as any)
+    const [dashboardActive, setdashboardActive] = useState(true)
+    const [leadActive, setleadActive] = useState(false)
+    const [itineraryActive, setItineraryActive] = useState(false)
+    const [invoiceActive, setInvoiceActive] = useState(false)
 
+    // useEffect(() => {
+    //   console.log("test menu...................")
+    // } ,[])
+    const handleDashboardActive = () => {
+      if (window.location.href.indexOf("/") > -1) {
+        setdashboardActive(true); 
+      }
+      setleadActive(false);
+      setInvoiceActive(false);
+      setItineraryActive(false);    
+    }
+    const handleLeadActive = () => {
+      console.log("test menu...................")
+      if (window.location.href.indexOf("/lead/") > -1) {
+        setleadActive(true);
+      }
+      setdashboardActive(false);
+      setInvoiceActive(false);
+      setItineraryActive(false);
+    }
+
+    const handleItinerary = () => {
+      if (window.location.href.indexOf("/itinerary/") > -1) {
+        setItineraryActive(true);
+      }
+      setdashboardActive(false);
+      setleadActive(false);
+      setInvoiceActive(false);
+    }
+
+    const handleInvoice = () => {
+      if (window.location.href.indexOf("/invoice") > -1 || window.location.href.indexOf("/customer") > -1) {
+        setInvoiceActive(true);
+      }
+      setleadActive(false);
+      setItineraryActive(false);
+      setdashboardActive(false);
+    }
+    
     const {
         createLead,
         manageLead,
@@ -25,7 +65,7 @@ const NavigationBar = () => {
         customisedItinerary,
         groupItinerary,
         readyItinerary,
-        propormainvoice,
+        proformainvoice,
         invoice,
         customerView,
     } = navigationURL;
@@ -39,26 +79,26 @@ const NavigationBar = () => {
       <Container fluid>
         <Navbar.Brand><Link to={dashboard}>Logo</Link></Navbar.Brand>
         <Nav className={styles.navigationWrapper}>
-                <Nav.Link><Link to={dashboard}>Dashboard</Link></Nav.Link>
-                <NavDropdown title="Lead" id="">
-                    <NavDropdown.Item><Link to={createLead}>Create new lead</Link></NavDropdown.Item>
-                    <NavDropdown.Item>
+                <Nav.Link className={dashboardActive ? "activemenu" : "inactivemenu"} onClick={handleDashboardActive}><Link to={dashboard}>Dashboard</Link></Nav.Link>
+                <NavDropdown title="Lead" className={leadActive ? "activemenu" : "inactivemenu"} >
+                    <NavDropdown.Item onClick={handleLeadActive} ><Link to={createLead}>Create new lead</Link></NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLeadActive} >
                         <Link to={manageLead}>Manage leads</Link>
                     </NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown title="My Itinerary" id="">
-                    <NavDropdown.Item><Link to={customisedItinerary}>Customized Itinerary</Link></NavDropdown.Item>
-                    <NavDropdown.Item><Link to={groupItinerary}>Group Itinerary</Link></NavDropdown.Item>
+                <NavDropdown title="My Itinerary" className={itineraryActive ? "activemenu" : "inactivemenu"}>
+                    <NavDropdown.Item onClick={handleItinerary}><Link to={customisedItinerary}>Customized Itinerary</Link></NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleItinerary}><Link to={groupItinerary}>Group Itinerary</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item><Link to={readyItinerary}>Ready Itinerary</Link></NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleItinerary}><Link to={readyItinerary}>Ready Itinerary</Link></NavDropdown.Item>
                 </NavDropdown>
-                <NavDropdown title="Customer & Billing" id="">
-                    <NavDropdown.Item><Link to={invoice}>Invoice</Link></NavDropdown.Item>
-                    <NavDropdown.Item><Link to={propormainvoice}>Proforma Invoice</Link></NavDropdown.Item>
+                <NavDropdown title="Customer & Billing" className={invoiceActive ? "activemenu" : "inactivemenu"}>
+                    <NavDropdown.Item onClick={handleInvoice}><Link to={invoice}>Invoice</Link></NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleInvoice}><Link to={proformainvoice}>Proforma Invoice</Link></NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item><Link to={customerView}>My Customers</Link></NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleInvoice}><Link to={customerView}>My Customers</Link></NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#action2">Hotels</Nav.Link>
+                <Nav.Link>Hotels</Nav.Link>
                 <NavDropdown title="Tools" id="">
                     <NavDropdown.Item>Website Builder</NavDropdown.Item>
                     <NavDropdown.Item>Travel Flyer</NavDropdown.Item>

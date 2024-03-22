@@ -68,7 +68,7 @@ const CreateNewCustomer = (props: any) => {
       event.stopPropagation();
     } else {
      
-      axios.post(`http://localhost:8001/createCustomer`, createNewCustomer).then((response) => {
+      axios.post(`http://localhost:8000/createcustomer`, createNewCustomer).then((response) => {
       console.log("onAddCustomerSubmit", response?.status)
       setLoading(response?.status === 201 ? false : true)
     }).catch((error) => {

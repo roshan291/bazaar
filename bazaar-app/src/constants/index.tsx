@@ -180,9 +180,10 @@ export const navigationURL = {
     groupItinerary: "/itinerary/group",
     readyItinerary: "/itinerary/ready",
     invoice: "/invoice",
-    propormainvoice: "/propormainvoice",
+    createinvoice: "/invoice/create",
+    proformainvoice: "/invoice/proforma",
     dashboard: "/",
-    customerView : "/customer/supervise"
+    customerView : "/customer",
 }
 
 export const manageLeadSideNavMoreList = [

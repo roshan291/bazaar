@@ -1,0 +1,63 @@
+{
+  "createlead": [],
+  "updatelead": [],
+  "deletelead": [],
+  "viewlead": [],
+  "createcustomer": [
+    {
+      "id": "bd79",
+      "customerFirstName": "p",
+      "customerLastName": "t",
+      "customerEmail": "t@gmail.com",
+      "customerMobile": "8988",
+      "country": "India",
+      "state": "adf",
+      "city": "fafa",
+      "zipcode": "560037"
+    },
+    {
+      "id": "8d88",
+      "customerFirstName": "Roshan",
+      "customerLastName": "Syed",
+      "customerEmail": "roshan@gmail.com",
+      "customerMobile": "9876543219",
+      "country": "India",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "zipcode": "560037"
+    },
+    {
+      "id": "2e3e",
+      "customerFirstName": "Raja",
+      "customerLastName": "Rusa",
+      "customerEmail": "ps@gmail.com",
+      "customerMobile": "8898989898",
+      "country": "Iceland",
+      "state": "TS",
+      "city": "Hyderabad",
+      "zipcode": "898898"
+    },
+    {
+      "id": "fd2d",
+      "customerFirstName": "test",
+      "customerLastName": "test",
+      "customerEmail": "tset@gmail.com",
+      "customerMobile": "3234234",
+      "country": "Afghanistan",
+      "state": "adfa",
+      "city": "af",
+      "zipcode": "434235"
+    }
+  ],
+  "updatecustomer": [],
+  "deletecustomer": [],
+  "viewcustomer": [],
+  "createitinerary": [],
+  "updateitinerary": [],
+  "deleteitinerary": [],
+  "viewitinerary": [],
+  "createinvoice": [],
+  "updateinvoice": [],
+  "deleteinvoice": [],
+  "viewinvoice": []
+}

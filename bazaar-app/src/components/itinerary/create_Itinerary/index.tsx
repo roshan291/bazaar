@@ -27,6 +27,8 @@ import Sightseeing from '../../../pages/itinerary/sightseeing';
 import Hotel from '../../../pages/itinerary/hotel';
 import NextDay from '../../../pages/itinerary/addNextDay';
 import { selectCountries } from '../../../constants/countries';
+import Daywiseplan from '../../../pages/itinerary/dayWisePlan';
+import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 const CreateItinerary = () => {
     const [validated, setValidated] = useState(false);
@@ -164,9 +166,14 @@ const CreateItinerary = () => {
         }
         setValidated(true);
       };
-
-
       
+
+    const MyDoc = () => (
+        <Document>
+            <Daywiseplan createItinerary = {createItinerary}/>
+        </Document>
+    );
+
   const handleChangeItinerary = (e: any) => {
     const target = e.target;
     
@@ -312,6 +319,9 @@ useEffect(() => {
         setOpenMeal(true);
     }
 
+   
+
+
   return (
 <>
     <NextDay show = {opeNextDay} onHide = {() => setOpeNextDay(false)} getnextDayData = {setNextDayData}/>
@@ -321,7 +331,7 @@ useEffect(() => {
     <HotelCheckout show = {openHotelCheckout} onHide = {() => setOpenHotelCheckout(false)} />
     <Sightseeing show = {openSightseeing} onHide = {() => setOpenSightseeing(false)} />
     <Hotel show = {openHotel} onHide = {() => setOpenHotel(false)} getDayHotel = {setDayHotel}/>
-
+                   
     <Container className={`${styles.create_itinerary_page} manage_top_view`}>
          <Container className="mb-3">
             <Row className='d-flex align-items-center justify-content-center'>
@@ -329,7 +339,14 @@ useEffect(() => {
                 {/* ROSHAN BANGALORE PACKAGE (#HBHITR78) */}
                 <Col className='d-flex align-items-center justify-content-end'>
                     <Button variant="outline-secondary" size="sm" >Preview Web view <FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                    <Button variant="outline-secondary" size="sm" className='ms-2'>Preview PDF <FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+                    {/* <Button variant="outline-secondary" size="sm" className='ms-2'>Preview PDF <FontAwesomeIcon icon={faMagnifyingGlass} /></Button> */}
+                    <Button variant="outline-secondary" size="sm" className='ms-2'>
+                        <PDFDownloadLink document={<MyDoc />} fileName="syed.pdf">
+                            {({ blob, url, loading, error }) =>
+                                loading ? 'Loading...' : 'Preview pdf'
+                            }
+                        </PDFDownloadLink><FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </Button>
                     <Button variant="outline-secondary" size="sm" className='ms-2' disabled>Send To Customer <FontAwesomeIcon icon={faEnvelope} /></Button>
                 </Col>
             </Row>

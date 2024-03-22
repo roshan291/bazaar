@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import CustomNavigation from '../../../Utilities/CustomNavigation'
 import { navigationURL } from '../../../constants'
+import DisplayTable from '../../../pages/itinerary/displayTable'
 
 const ReadyItinerary = () => {
     const [navigateUrl, setNavigateUrlUrl] = useState("")
@@ -16,6 +17,7 @@ const ReadyItinerary = () => {
       <div >ReadyItinerary</div>
       <h5 onClick={handleNavigation}>Create Itinerary</h5>
     </div>
+    <DisplayTable />
     </>
   )
 }

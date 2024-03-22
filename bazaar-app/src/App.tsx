@@ -9,9 +9,11 @@ import Dashboard from './components/dashboard';
 import CustomisedItinerary from './components/itinerary/customised_Itinerary';
 import GroupItinerary from './components/itinerary/group_Itinerary';
 import ReadyItinerary from './components/itinerary/ready_Itinerary';
-import Invoice from './components/billing/invoice';
-import PropormaInvoice from './components/billing/proformaInvoice';
+import Invoice from './components/billing/invoice'; 
 import MyCustomer from './components/billing/myCustomer';
+import ProformaInvoice from './components/billing/proformaInvoice';
+import { navigationURL } from './constants';
+import CreateInvoice from './components/billing/invoice/createInvoice';
 
 function App() {
   return (
@@ -42,9 +44,10 @@ function App() {
       <Route path="/billing/create" element={<CreateInvoice />}/>
       <Route path="/billing/supervise" element={<SuperviseInvoice />}/>
       <Route path="/billing/update/:id" element={<UpdateInvoice />}/>*/}
-      <Route path="/customer/supervise" element={<MyCustomer />}/>
+      <Route path="/customer" element={<MyCustomer />}/>
       <Route path="/invoice" element={<Invoice />}/>
-      <Route path="/propormainvoice" element={<PropormaInvoice />}/>
+      <Route path="/invoice/proforma" element={<ProformaInvoice />}/>
+      <Route path={navigationURL.createinvoice} element={<CreateInvoice />}/>
       <Route path="/customer/create" element={<MyCustomer />} />
       <Route path="/itinerary/create" element={<CreateItinerary />}/> 
       <Route path="/itinerary/customised" element={<CustomisedItinerary />}/>

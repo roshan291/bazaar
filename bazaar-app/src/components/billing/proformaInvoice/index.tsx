@@ -1,9 +1,9 @@
 import React from 'react'
 
-const PropormaInvoice = () => {
+const ProformaInvoice = () => {
   return (
-    <div className='manage_top_view'>PropormaInvoice</div>
+    <div className='manage_top_view'>ProformaInvoice</div>
   )
 }
 
-export default PropormaInvoice
+export default ProformaInvoice

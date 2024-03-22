@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./manage.module.css"
-import { leadStatus, manageLeadSideNavMoreList, notApplicable } from '../../../constants';
+import { leadStatus, manageLeadSideNavMoreList, navigationURL, notApplicable } from '../../../constants';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 import { leadMockData } from '../../../constants/mocks';
@@ -12,6 +12,7 @@ import { faSquarePlus, faAngleUp, faXmark, faExpand, faAngleDown, faCheck, faMin
 import ManageLeadSideNavMore from '../../../Utilities/ManageLeadSideNavMore';
 import UpdateLeadStatus from '../../../Utilities/UpdateLeadStatus';
 import Collapse from 'react-bootstrap/Collapse';
+import { Link } from 'react-router-dom';
 
 const ManageLead = () => {
   const [activeStatus, setActiveStatus] = useState<string>("All");
@@ -47,6 +48,9 @@ const ManageLead = () => {
 
   const handleCloseButton = () => {
     setActiveSideViewOfLead(false)
+    console.log("activeFullViewOfLead", activeFullViewOfLead)
+    // setActiveFullViewOfLead(!activeFullViewOfLead)
+    // activeFullViewOfLead ? setActiveSideViewOfLead(false) : setActiveSideViewOfLead(true)
   }
 
   console.log("showSingleView",showSingleView)
@@ -68,6 +72,10 @@ const ManageLead = () => {
   const handleExpandFullScreenView = () => {
     setActiveFullViewOfLead(!activeFullViewOfLead)
   }
+
+  const {
+    createLead,
+} = navigationURL;
 
   return (
     <>
@@ -92,7 +100,7 @@ const ManageLead = () => {
             </ul>
           </Col>
           <Col xs lg="1"></Col>
-          <Col xs lg="2" className={styles.managelead_createLead}><Button variant="link">Create new lead <FontAwesomeIcon icon={faSquarePlus} /></Button></Col>
+          <Col xs lg="2" className={styles.managelead_createLead}><Button variant="link"><Link to={createLead}>Create new lead</Link> <FontAwesomeIcon icon={faSquarePlus} /></Button></Col>
         </Row>
       </Container>
     </Container>
@@ -169,7 +177,7 @@ const ManageLead = () => {
         {activeSideViewOfLead ? <div className={styles.managelead_main_right}>
           <Row className='align-items-center'>
             <Col xs lg="6"><h4>{showSingleView["leadTitle"]}</h4></Col>
-            <Col xs lg="6" style = {{textAlign: "right"}} className={styles.managelead_sideview_nav}><span onClick={() => handleOpenModalForMenu()}>MENU { activeForMenu ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />} </span> <span onClick={() => handleExpandFullScreenView()}> { activeFullViewOfLead ? <FontAwesomeIcon icon={faMinimize} /> : <FontAwesomeIcon icon={faMaximize} />}  </span><span onClick={() => handleCloseButton()}> <FontAwesomeIcon icon={faXmark} /></span></Col>
+            <Col xs lg="6" style = {{textAlign: "right"}} className={styles.managelead_sideview_nav}><span onClick={() => handleOpenModalForMenu()}>MENU { activeForMenu ? <FontAwesomeIcon icon={faAngleUp} /> : <FontAwesomeIcon icon={faAngleDown} />} </span> <span onClick={() => handleExpandFullScreenView()}> { activeFullViewOfLead ? <FontAwesomeIcon icon={faMinimize} /> : <FontAwesomeIcon icon={faMaximize} />}  </span>{!activeFullViewOfLead ? <span onClick={() => handleCloseButton()}> <FontAwesomeIcon icon={faXmark} /></span> : <></>}</Col>
           </Row>
           <Row className={`align-items-center ${styles.managelead_sideview_info}`}>
             <Col xs lg="6"><label><span>For</span> Venkatesh | <span>Travelling</span> 02 Aug 2023 | <span>New Since</span> (186 Days)</label></Col>

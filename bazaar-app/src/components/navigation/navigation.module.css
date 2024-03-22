@@ -19,14 +19,12 @@
 .navigationWrapper ul {
     margin: 0;
 }
-.navigationWrapper .activemenu {
-    background-color: #0067ff;
-    color: #fff;
-}
+
 
 .leadChildMenu li:hover {
     background-color: #dfdfdf;
 }
+
 
 .itineraryChildMenu, .invoiceChildMenu, .toolsChildMenu , .helpChildMenu, .leadChildMenu {
     position: absolute;
@@ -72,4 +70,8 @@
     top: 0;
     width: 100%;
     z-index: 999;
+}
+
+.navigationWrapper .active {
+
 }
