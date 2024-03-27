@@ -52,7 +52,445 @@
   "updatecustomer": [],
   "deletecustomer": [],
   "viewcustomer": [],
-  "createitinerary": [],
+  "createitinerary": [
+    {
+      "id": "d3a7",
+      "itineraryTitle": "Roshan first Itinerary Title",
+      "destination": "Bangalore",
+      "typeOfHoliday": "Honeymoon",
+      "noOfAdults": "3",
+      "noOfKids": "3",
+      "startDate": "09/10/2024",
+      "endDate": "19/10/2024",
+      "coupleList": "Per Person",
+      "currencyType": "INR",
+      "budgetForTrip": "100000",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": true,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": true,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": true,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": true,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": true,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": true,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": true,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "noOfNights": "3",
+      "travellers": "Bus",
+      "welcomenote": "Welcome note 1",
+      "customerName": "Mahesh",
+      "emailId": "roshan@gmail.com",
+      "mobileNumber": "9642345291",
+      "address": "Hyderabad",
+      "country": "India",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "postalCode": "560035",
+      "birthDate": "03/06/1991",
+      "anniversaryDate": "19/06/1016",
+      "note": "Note test",
+      "inclusion": "Inclusion test",
+      "exclusion": "Exclustion test",
+      "cost": "90009",
+      "termsConditions": "Terms condition",
+      "tips": "tips test",
+      "otherVisaInformation": "otehr visa information",
+      "thankyounote": "thank you note",
+      "changestatus": "In progress",
+      "dayWisePlanFinal": [
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        }
+      ]
+    },
+    {
+      "id": "26e4",
+      "itineraryTitle": "test",
+      "destination": "tset",
+      "typeOfHoliday": "Short Breaks",
+      "noOfAdults": "",
+      "noOfKids": "",
+      "startDate": "",
+      "endDate": "",
+      "coupleList": "",
+      "currencyType": "",
+      "budgetForTrip": "900000",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": false,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "noOfNights": "",
+      "travellers": "",
+      "welcomenote": "",
+      "customerName": "My Name",
+      "emailId": "",
+      "mobileNumber": "999999999999",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "postalCode": "",
+      "birthDate": "",
+      "anniversaryDate": "",
+      "note": "",
+      "inclusion": "",
+      "exclusion": "",
+      "cost": "",
+      "termsConditions": "",
+      "tips": "",
+      "otherVisaInformation": "",
+      "thankyounote": "Thankyou Note 2",
+      "changestatus": "Sent to customer",
+      "dayWisePlanFinal": [
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        }
+      ]
+    },
+    {
+      "id": "97d6",
+      "itineraryTitle": "Third Itinerary title",
+      "destination": "tset",
+      "typeOfHoliday": "Short Breaks",
+      "noOfAdults": "",
+      "noOfKids": "",
+      "startDate": "",
+      "endDate": "",
+      "coupleList": "",
+      "currencyType": "",
+      "budgetForTrip": "900000000",
+      "serviceList": [
+        {
+          "id": 1,
+          "isChecked": false,
+          "serviceName": "Airfare"
+        },
+        {
+          "id": 2,
+          "isChecked": false,
+          "serviceName": "Internal Transportation"
+        },
+        {
+          "id": 3,
+          "isChecked": false,
+          "serviceName": "Hotel Stay"
+        },
+        {
+          "id": 4,
+          "isChecked": false,
+          "serviceName": "Sightseeing"
+        },
+        {
+          "id": 5,
+          "isChecked": false,
+          "serviceName": "Visa Fees"
+        },
+        {
+          "id": 6,
+          "isChecked": false,
+          "serviceName": "Government Tax"
+        },
+        {
+          "id": 7,
+          "isChecked": false,
+          "serviceName": "Surcharge"
+        },
+        {
+          "id": 8,
+          "isChecked": false,
+          "serviceName": "Cruise Stay"
+        },
+        {
+          "id": 9,
+          "isChecked": false,
+          "serviceName": "Free Goodies"
+        },
+        {
+          "id": 10,
+          "isChecked": false,
+          "serviceName": "APAI - Stay & All Meals"
+        },
+        {
+          "id": 11,
+          "isChecked": false,
+          "serviceName": "Passport Fees"
+        },
+        {
+          "id": 12,
+          "isChecked": false,
+          "serviceName": "CP - Stay & Breakfast"
+        },
+        {
+          "id": 13,
+          "isChecked": false,
+          "serviceName": "Tour Manager"
+        },
+        {
+          "id": 14,
+          "isChecked": false,
+          "serviceName": "MAP - Stay, Breakfast & Dinner"
+        }
+      ],
+      "noOfNights": "",
+      "travellers": "",
+      "welcomenote": "",
+      "customerName": "Rajesh Reddy",
+      "emailId": "",
+      "mobileNumber": "7983839289",
+      "address": "",
+      "country": "",
+      "state": "",
+      "city": "",
+      "postalCode": "",
+      "birthDate": "",
+      "anniversaryDate": "",
+      "note": "",
+      "inclusion": "",
+      "exclusion": "",
+      "cost": "",
+      "termsConditions": "",
+      "tips": "",
+      "otherVisaInformation": "",
+      "thankyounote": "Thankyou Note 2",
+      "changestatus": "Sent to customer",
+      "dayWisePlanFinal": [
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        },
+        {
+          "id": 1,
+          "day": "",
+          "description": [],
+          "transportation": [],
+          "hotel": [],
+          "checkoutHotel": [],
+          "sightseeing": [],
+          "meal": []
+        }
+      ]
+    }
+  ],
   "updateitinerary": [],
   "deleteitinerary": [],
   "viewitinerary": [],

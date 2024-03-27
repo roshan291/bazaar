@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { helpChild, invoiceChild, itineraryChild, leadsChild, navigationConstant, navigationURL, toolsChild } from "../../constants"
 import styles from "./navigation.module.css"
 import OutsideClick from "../../Utilities/outsideClick";
@@ -18,11 +18,14 @@ const NavigationBar = () => {
     const [leadActive, setleadActive] = useState(false)
     const [itineraryActive, setItineraryActive] = useState(false)
     const [invoiceActive, setInvoiceActive] = useState(false)
+    const navigate = useNavigate(); 
 
-    // useEffect(() => {
-    //   console.log("test menu...................")
-    // } ,[])
+    useEffect(() => {
+      console.log("test menu...................")
+    } ,[])
+    
     const handleDashboardActive = () => {
+      navigate(dashboard); 
       if (window.location.href.indexOf("/") > -1) {
         setdashboardActive(true); 
       }
@@ -79,7 +82,7 @@ const NavigationBar = () => {
       <Container fluid>
         <Navbar.Brand><Link to={dashboard}>Logo</Link></Navbar.Brand>
         <Nav className={styles.navigationWrapper}>
-                <Nav.Link className={dashboardActive ? "activemenu" : "inactivemenu"} onClick={handleDashboardActive}><Link to={dashboard}>Dashboard</Link></Nav.Link>
+                <Nav.Link className={dashboardActive ? "activemenu" : "inactivemenu"} onClick={handleDashboardActive}>Dashboard</Nav.Link>
                 <NavDropdown title="Lead" className={leadActive ? "activemenu" : "inactivemenu"} >
                     <NavDropdown.Item onClick={handleLeadActive} ><Link to={createLead}>Create new lead</Link></NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLeadActive} >
@@ -93,10 +96,13 @@ const NavigationBar = () => {
                     <NavDropdown.Item onClick={handleItinerary}><Link to={readyItinerary}>Ready Itinerary</Link></NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Customer & Billing" className={invoiceActive ? "activemenu" : "inactivemenu"}>
-                    <NavDropdown.Item onClick={handleInvoice}><Link to={invoice}>Invoice</Link></NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleInvoice}><Link to={proformainvoice}>Proforma Invoice</Link></NavDropdown.Item>
+                    <Link to={invoice} onClick={handleInvoice}>Invoice</Link>
+                    <Link to={proformainvoice} onClick={handleInvoice}>Proforma Invoice</Link>
+                    {/* <NavDropdown.Item onClick={handleInvoice}><Link to={invoice}>Invoice</Link></NavDropdown.Item> */}
+                    {/* <NavDropdown.Item onClick={handleInvoice}><Link to={proformainvoice}>Proforma Invoice</Link></NavDropdown.Item> */}
                     <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={handleInvoice}><Link to={customerView}>My Customers</Link></NavDropdown.Item>
+                    <Link to={customerView} onClick={handleInvoice}>My Customers</Link>
+                    {/* <NavDropdown.Item onClick={handleInvoice}><Link to={customerView}>My Customers</Link></NavDropdown.Item> */}
                 </NavDropdown>
                 <Nav.Link>Hotels</Nav.Link>
                 <NavDropdown title="Tools" id="">

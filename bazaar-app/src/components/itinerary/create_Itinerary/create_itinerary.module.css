@@ -18,9 +18,19 @@
 }
 .circleArrowUp button {
     border-radius: 50%;
+    border: none;
+    -webkit-box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+    box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.45);
+}
+.circleArrowUp button:hover {
+    box-shadow: none;
+    color: #0067ff;
+    background-color: initial;
+    border-color: initial;
 }
 .circleArrowUp svg {
-    transform: scale(2);
+    transform: scale(2.5);
     right: 50px;
 }
 

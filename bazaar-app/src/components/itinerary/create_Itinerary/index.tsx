@@ -29,6 +29,8 @@ import NextDay from '../../../pages/itinerary/addNextDay';
 import { selectCountries } from '../../../constants/countries';
 import Daywiseplan from '../../../pages/itinerary/dayWisePlan';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import axios from 'axios';
+import RichTextEditor from '../../../Utilities/CreateRichTextEditor';
 
 const CreateItinerary = () => {
     const [validated, setValidated] = useState(false);
@@ -56,7 +58,7 @@ const CreateItinerary = () => {
     const [dayTransportationSelectedID, setDayTransportationSelectedID] = useState(Number);
     const [daySighseeingSelectedID, setDdaySighseeingSelectedID] = useState(Number);
     const [dayHotelSelectedID, setDdayHotelSelectedID] = useState(Number);
-
+    const [loading, setLoading] = React.useState(false)
     // sightseeing
 
     console.log("nextDayData", nextDayData)
@@ -152,20 +154,26 @@ const CreateItinerary = () => {
 
     console.log("createItinerary", createItinerary)
     const handleSubmit = (event: any) => {
+        console.log("createitinerary called")
         event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-          event.stopPropagation();
-        } else {
-        //   axios.post(`http://localhost:8001/createLead`, createLead).then((response: any) => {
-         console.log("onAddCustomerSubmit")
-        // })
-          console.log("handleSubmit", createItinerary);
-          // handleClose();
-          // history("/lead-board/supervise")
-        }
-        setValidated(true);
-      };
+        
+        // const form = event.currentTarget;
+        // console.log("createitinerary ------------------------", form.checkValidity())
+        // if (form.checkValidity() === false) {
+        //   event.stopPropagation();
+        //   console.log("createitinerary called if")
+        // } else {
+            console.log("createitinerary called else")
+            axios.post(`http://localhost:8000/createitinerary`, createItinerary).then((response) => {
+                console.log("onAdd create itinerary Submit", response?.status)
+                setLoading(response?.status === 201 ? false : true)
+            }).catch((error) => {
+                setLoading(false)
+                console.log("failed with", error)
+            })
+            setValidated(true);
+    //   };
+    }
       
 
     const MyDoc = () => (
@@ -340,13 +348,13 @@ useEffect(() => {
                 <Col className='d-flex align-items-center justify-content-end'>
                     <Button variant="outline-secondary" size="sm" >Preview Web view <FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
                     {/* <Button variant="outline-secondary" size="sm" className='ms-2'>Preview PDF <FontAwesomeIcon icon={faMagnifyingGlass} /></Button> */}
-                    <Button variant="outline-secondary" size="sm" className='ms-2'>
+                    {/* <Button variant="outline-secondary" size="sm" className='ms-2'>
                         <PDFDownloadLink document={<MyDoc />} fileName="syed.pdf">
                             {({ blob, url, loading, error }) =>
                                 loading ? 'Loading...' : 'Preview pdf'
                             }
                         </PDFDownloadLink><FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </Button>
+                    </Button> */}
                     <Button variant="outline-secondary" size="sm" className='ms-2' disabled>Send To Customer <FontAwesomeIcon icon={faEnvelope} /></Button>
                 </Col>
             </Row>
@@ -376,7 +384,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column className='d-flex align-items-start justify-content-start'>Type of Holidays<span className='required'>*</span></Form.Label>
                             <Col>
-                            <CustomDropdown required = {true} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
+                            <CustomDropdown required = {false} value = {typeOfHoliday} onChange = {handleChangeItinerary} name = "typeOfHoliday" dropdownData = {selectTypeOfHoliday} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -385,7 +393,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Adults</Form.Label>
                             <Col >
-                                <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {noOfAdults} onChange = {handleChangeItinerary} name = "noOfAdults" />
+                                <CustomNumberInput onKeyPress = {onKeyPress} required = {false} value = {noOfAdults} onChange = {handleChangeItinerary} name = "noOfAdults" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -393,7 +401,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Child</Form.Label>
                             <Col >
-                                <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {noOfKids} onChange = {handleChangeItinerary} name = "noOfKids" />
+                                <CustomNumberInput onKeyPress = {onKeyPress} required = {false} value = {noOfKids} onChange = {handleChangeItinerary} name = "noOfKids" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -417,7 +425,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Nights</Form.Label>
                             <Col >
-                                <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {noOfNights} onChange = {handleChangeItinerary} name = "noOfNights" />
+                                <CustomNumberInput onKeyPress = {onKeyPress} required = {false} value = {noOfNights} onChange = {handleChangeItinerary} name = "noOfNights" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -425,7 +433,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Travellers</Form.Label>
                             <Col >
-                                <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {travellers} onChange = {handleChangeItinerary} name = "travellers" />
+                                <CustomNumberInput onKeyPress = {onKeyPress} required = {false} value = {travellers} onChange = {handleChangeItinerary} name = "travellers" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -433,7 +441,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Budget/Cost</Form.Label>
                             <Col >
-                                <CustomNumberInput onKeyPress = {onKeyPress} required = {true} value = {budgetForTrip} onChange = {handleChangeItinerary} name = "budgetForTrip" />
+                                <CustomNumberInput onKeyPress = {onKeyPress} required = {false} value = {budgetForTrip} onChange = {handleChangeItinerary} name = "budgetForTrip" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -441,7 +449,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Cost For</Form.Label>
                             <Col >
-                                <CustomDropdown required = {true} value = {coupleList} onChange = {handleChangeItinerary} name = "coupleList" dropdownData = {selectCouple} />
+                                <CustomDropdown required = {false} value = {coupleList} onChange = {handleChangeItinerary} name = "coupleList" dropdownData = {selectCouple} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -449,7 +457,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Currency</Form.Label>
                             <Col >
-                                <CustomDropdown required = {true} value = {currencyType} onChange = {handleChangeItinerary} name = "currencyType" dropdownData = {selectCurrency} />
+                                <CustomDropdown required = {false} value = {currencyType} onChange = {handleChangeItinerary} name = "currencyType" dropdownData = {selectCurrency} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -482,7 +490,7 @@ useEffect(() => {
                             <br />
                             <Form.Label column className='d-flex align-items-start justify-content-start'>Welcome Note</Form.Label>
                             <Col> 
-                                <CustomDropdown required = {true} value = {welcomenote} onChange = {handleChangeItinerary} name = "welcomenote" dropdownData = {selectWelcomeNote} />
+                                <CustomDropdown required = {false} value = {welcomenote} onChange = {handleChangeItinerary} name = "welcomenote" dropdownData = {selectWelcomeNote} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -494,7 +502,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Customer name </Form.Label>
                             <Col>
-                                <CustomTextInput required = {true} value = {customerName} onChange = {handleChangeItinerary} name = "customerName" />
+                                <CustomTextInput required = {false} value = {customerName} onChange = {handleChangeItinerary} name = "customerName" />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -518,7 +526,7 @@ useEffect(() => {
                         <Form.Group className="mb-1" controlId="Itinerary Title">
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Country</Form.Label>
                             <Col>
-                            <CustomDropdown placeholder = "Select Country" required = {true} value = {country} onChange = {handleChangeItinerary} name = "country" dropdownData = {selectCountries} />
+                            <CustomDropdown placeholder = "Select Country" required = {false} value = {country} onChange = {handleChangeItinerary} name = "country" dropdownData = {selectCountries} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -575,6 +583,7 @@ useEffect(() => {
                             <Form.Label column  className='d-flex align-items-start justify-content-start'>Note</Form.Label>
                             <Col>
                                 <CustomeTextarea required = {false} value = {note} onChange = {handleChangeItinerary} name = "note" />
+                                {/* <RichTextEditor /> */}
                             </Col>
                         </Form.Group>
                     </Col> 
@@ -811,13 +820,13 @@ useEffect(() => {
                     <Form.Group className="mb-3" controlId="Itinerary Title">
                         <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Thank you Note</Form.Label>
                         <Col sm="6"> 
-                            <CustomDropdown required = {true} value = {thankyounote} onChange = {handleChangeItinerary} name = "thankyounote" dropdownData = {selectThankyouNote} />
+                            <CustomDropdown required = {false} value = {thankyounote} onChange = {handleChangeItinerary} name = "thankyounote" dropdownData = {selectThankyouNote} />
                         </Col>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="Itinerary Title">
                         <Form.Label column sm="2" className='d-flex align-items-end justify-content-start'>Change Status</Form.Label>
                         <Col sm="6"> 
-                            <CustomDropdown required = {true} value = {changestatus} onChange = {handleChangeItinerary} name = "changestatus" dropdownData = {itineraryStatus} />
+                            <CustomDropdown required = {false} value = {changestatus} onChange = {handleChangeItinerary} name = "changestatus" dropdownData = {itineraryStatus} />
                         </Col>
                     </Form.Group>
                     <br />

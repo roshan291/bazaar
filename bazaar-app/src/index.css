@@ -185,3 +185,23 @@ body {
   color: #fff !important;
   text-decoration: none;
 }
+
+.itinerary_actin_wrapper {
+
+}
+
+.itinerary_actin_wrapper svg {
+  margin-left: 15px;
+  cursor: pointer;
+  color: #0067ff;
+  transform: scale(1.1);
+}
+
+.itinerary_actin_wrapper svg:last-child {
+  transform: scale(1.23);
+  color: #e7505a;
+}
+
+.itinerary_actin_wrapper a svg {
+  color: #0067ff !important;
+}
