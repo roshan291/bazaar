@@ -3,11 +3,11 @@ import { PDFDownloadLink, Page, Text, View, Document, StyleSheet, Image} from '@
 import accumulatedHeightOfRenderingComponents from "@react-pdf/renderer"
 import sizeOfPage from "@react-pdf/renderer"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCar } from '@fortawesome/free-solid-svg-icons';
 import inclusionImage from "../../assets/images/inclusion.png";
 import transportImage from "../../assets/images/transport.png";
 import tipsImage from "../../assets/images/tips.png";
-import daywiseplanImage from "../../assets/images/daywiseplan.png";
+import daywiseplanImage from "../../assets/images/daywiseplan1.jpg";
 import thankyou from "../../assets/images/thankyou.png";
 
 const Daywiseplan = (props:any) => {
@@ -32,6 +32,14 @@ const Daywiseplan = (props:any) => {
         coupleList,
         budgetForTrip,
         noOfNights,
+        tips,
+        otherVisaInformation,
+        inclusion,
+        exclusion,
+        cost,
+        termsConditions,
+        cancellation,
+        dayWisePlanFinal,
     } = rowData;
 
     const contentDoesNotFit =  accumulatedHeightOfRenderingComponents >= sizeOfPage;
@@ -73,12 +81,65 @@ const Daywiseplan = (props:any) => {
             marginRight: 10,
             fontSize : 14,
         },
+        tipsOtherInfo: {
+            fontSize : 12,
+            padding: 10,
+        },
+        tipsOtherInfoTitle: {
+            color: '#0067ff',
+        },
+        tipsOtherInfoText: {
+            marginTop: 3,
+            marginBottom: 10,
+            color: '#979797',
+        },
         inclusionWrapper: {
             display: 'flex', 
             flexDirection: 'row', 
             flexWrap: "wrap",
             width: '100%',
             fontSize : 11,
+        },
+        transportationDate: {
+            fontSize : 18,
+            color: '#0067ff',
+            textDecoration: 'underline',
+            fontWeight: 600,
+            letterSpacing: '1px',
+            marginTop: 15, 
+            marginLeft: 15, 
+            marginBottom: 10,
+            textDecorationStyle: 'dotted'
+        },
+        transportationTitle: {
+            fontSize : 12,
+            color: '#e7505a',
+            marginLeft: 10,
+        },
+        transportationTitleWrapper: {
+            display: 'flex', 
+            flexDirection: 'row', 
+            alignItems: 'center',
+            fontSize : 12,
+            color: '#e7505a',
+            marginLeft: 30, 
+        },
+        transportationDetails: {
+            display: 'flex', 
+            flexDirection: 'row',  
+            color: '#979797',
+            fontSize : 12,
+            marginLeft: 40, 
+            marginTop: 10, 
+            justifyContent: "space-between"
+        },
+        transportationDetailsInner: {
+            display: 'flex', 
+            flexDirection: 'column',  
+        },
+        transportationDetailsInnerTitle: {
+            color: '#000000',  
+            marginRight: 5,
         },
         leftColumn: {
             width: '50%',
@@ -96,6 +157,13 @@ const Daywiseplan = (props:any) => {
             height: 130,
         },
       });
+
+      const getTransportationType = () => {
+        return <FontAwesomeIcon icon={faCar} />
+      }
+
+      const transportationData =  dayWisePlanFinal?.map((item: any) => item.transportation);
+      console.log("transportationData", transportationData, transportationData?.map((list: any) => list.startingPoint))
 
   return (
     <>
@@ -125,8 +193,8 @@ const Daywiseplan = (props:any) => {
              </View>
             </View>
         </Page>
-        <Page style={styles.page} wrap={true}>
-            <View style={styles.inner} break={contentDoesNotFit}>
+        <Page>
+            <View style={styles.inner}>
                 <View style={styles.pageCenter}>
                     <Text style={styles.text}>Dear {customerName}, </Text>
                     <Text style={styles.text}>Greetings from Holiday Bazaar, and we hope you are well! </Text>
@@ -142,21 +210,78 @@ const Daywiseplan = (props:any) => {
         <Page>
             <View style={styles.innerTop}>
                 <Image src={daywiseplanImage} style={styles.image} />
+                
             </View>
         </Page>
         <Page>
             <View style={styles.innerTop}>
                 <Image src={transportImage} style={styles.image} />
+                {
+                    transportationData?.map((list: any) => <>
+                        <Text style={styles.transportationDate}>{list.departDate}</Text>
+                        <View style={styles.transportationTitleWrapper}>
+                            <Text>{getTransportationType()}</Text><Text style={styles.transportationTitle}>{list.transpotationMode} From {list.startingPoint}</Text>
+                        </View>
+                    </>
+                    )
+                }
+                
+                <View style={styles.transportationDetails} >
+                    <View style={styles.leftColumn}>
+                        <View style={styles.transportationDetailsInner}>
+                            {
+                                transportationData?.map((list: any) => <>
+                                    <Text style={styles.transportationDetailsInnerTitle}>From:</Text><Text>{list.startingPoint}, {list.departingCity}, {list.departingCountry}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Transportation Mode:</Text><Text>{list.transpotationMode}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Actual Departure Time:</Text><Text>{list.actualDepartureTime}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Reporting Time:</Text><Text>{list.reportingTime}</Text>
+                                </>)
+                            }
+                        </View>
+                        
+                    </View>
+                    <View style={styles.rightColumn}> 
+                        <View style={styles.transportationDetailsInner}>
+                            {
+                                transportationData?.map((list: any) => <>
+                                    <Text style={styles.transportationDetailsInnerTitle}>To:</Text><Text>{list.endingPoint}, {list.arrivalCity}, {list.arrivalCountry}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Actual Arrival Time:</Text><Text>{list.actualArrivalTime}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Arrival Date:</Text><Text>{list.arrialDate}</Text>
+                                    <Text style={styles.transportationDetailsInnerTitle}>Transportation Note:</Text><Text>{list.transpotationNote}</Text>
+                                </>)
+                            }
+                        </View>
+                    </View>
+                </View>
             </View>
+
         </Page>
         <Page>
             <View style={styles.innerTop}>
                 <Image src={inclusionImage} style={styles.image} />
             </View>
+            <View style={styles.tipsOtherInfo}>
+                <Text style={styles.tipsOtherInfoTitle}>Inclusion: </Text>
+                <Text style={styles.tipsOtherInfoText}>{inclusion}</Text>
+                <Text style={styles.tipsOtherInfoTitle}>Exclusion: </Text>
+                <Text style={styles.tipsOtherInfoText}>{exclusion}</Text>
+                <Text style={styles.tipsOtherInfoTitle}>Cost: </Text>
+                <Text style={styles.tipsOtherInfoText}>{cost}</Text>
+                <Text style={styles.tipsOtherInfoTitle}>Terms & Conditions: </Text>
+                <Text style={styles.tipsOtherInfoText}>{termsConditions}</Text>
+                <Text style={styles.tipsOtherInfoTitle}>Cancellation: </Text>
+                <Text style={styles.tipsOtherInfoText}>{cancellation}</Text>
+            </View>
         </Page>
         <Page>
             <View style={styles.innerTop}>
                 <Image src={tipsImage} style={styles.image} />
+            </View>
+            <View style={styles.tipsOtherInfo}>
+                <Text style={styles.tipsOtherInfoTitle}>Tips: </Text>
+                <Text style={styles.tipsOtherInfoText}>{tips}</Text>
+                <Text style={styles.tipsOtherInfoTitle}>Others / Visa Information: </Text>
+                <Text style={styles.tipsOtherInfoText}>{otherVisaInformation}</Text>
             </View>
         </Page>
         <Page>

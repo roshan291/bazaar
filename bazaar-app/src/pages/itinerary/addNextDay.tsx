@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState, useId } from 'react' 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/esm/Form';
@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/esm/Col';
 import CustomDatePicker from '../../Utilities/CustomDatePicker';
 
 const NextDay = (props: any) => {
+  const uniqueId = useId(); 
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   const [daysList, setDaysList] = useState([] as any);
@@ -19,6 +20,7 @@ const NextDay = (props: any) => {
   }, [props])
 
   const [daySelect, setDaySelect] = useState({
+    id: uniqueId,
     dayTitle: "",
     dayDate: "",
 })
@@ -51,7 +53,7 @@ const onSubmitCreateNewDay = (event: any) => {
 
       // setDaysList([...daysList, daySelect]);  
       // props?.getnextDayData([...daysList, daySelect]); 
-      setDaySelect({ dayTitle: "", dayDate: "" }); 
+      // setDaySelect({ dayTitle: "", dayDate: "" }); 
     }
 }
   return (

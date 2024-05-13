@@ -16,16 +16,17 @@ const MyCustomer = () => {
     });
   },[])
   
+  console.log("data ____________________________________", data);
   const handleCreateNewCustomer = () => {
     console.log("Create New Customer")
     setCreateNewCustomerModalShow(true)
   }
 
-  const handleUpdateCustomer = () => {
-    console.log("Update Customer clicked")
+  const handleUpdateCustomer = (id: any) => {
+    console.log("Update Customer clicked", id)
   }
-  const handleDeleteCustomer = () => {
-    console.log("Delete Customer clicked")
+  const handleDeleteCustomer = (id: any) => {
+    console.log("Delete Customer clicked", id)
 }
 
   return (
@@ -47,16 +48,16 @@ const MyCustomer = () => {
         </thead>
         <tbody>
             {
-                 data?.map((item: any, index : any) => <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.customerFirstName} {item.customerLastName} </td>
-                    <td>{item.customerEmail}</td>
-                    <td>{item.customerMobile}</td> 
-                    <td>
-                        <FontAwesomeIcon icon={faPenToSquare} onClick = {() => handleUpdateCustomer()}/>
-                        <FontAwesomeIcon icon={faXmark} onClick = {() => handleDeleteCustomer()}/>
-                    </td>
-                 </tr>)
+              data?.map((item: any, index: any) => <tr key={index + 1}>
+                <td>{index + 1}</td>
+                <td>{item.customerFirstName} {item.customerLastName} </td>
+                <td>{item.customerEmail}</td>
+                <td>{item.customerMobile}</td> 
+                <td>
+                    <FontAwesomeIcon icon={faPenToSquare} onClick = {() => handleUpdateCustomer(item.id)}/>
+                    <FontAwesomeIcon icon={faXmark} onClick = {() => handleDeleteCustomer(item.id)}/>
+                </td>
+              </tr>)
             }
         </tbody>
         </Table>

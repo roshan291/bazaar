@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useId} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CustomTextInput from '../../Utilities/CustomTextInput';
@@ -12,6 +12,7 @@ import { selectCountries } from '../../constants/countries';
 import CustomDropdown from '../../Utilities/CustomDropdown';
 
 const Transportation = (props: any) => {
+    const uniqueId = useId(); 
     const [show, setShow] = useState(false); 
     const [validated, setValidated] = useState(false);
     useEffect(() => {
@@ -19,6 +20,7 @@ const Transportation = (props: any) => {
     }, [props])
 
     const [transportation, setTransportation] = useState({
+        id: uniqueId,
         transportationTitle: "",
         transpotationMode: "",
         departingCountry: "",
@@ -70,22 +72,6 @@ const Transportation = (props: any) => {
           event.stopPropagation();
         } else {
           props?.getDayTransportation([transportation])
-          setTransportation({
-            transportationTitle: "",
-            transpotationMode: "",
-            departingCountry: "",
-            departingCity: "",
-            startingPoint: "",
-            departDate: "",
-            actualDepartureTime: "",
-            reportingTime: "",
-            arrivalCountry: "",
-            arrivalCity: "",
-            endingPoint: "",
-            arrialDate: "",
-            actualArrivalTime: "",
-            transpotationNote: "",
-          })
         }
       }
 

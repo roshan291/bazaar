@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState, useId } from 'react' 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/esm/Form';
@@ -18,6 +18,8 @@ import { stateCitiesMap } from '../../constants/cities';
 import AddOwnHotel from './addOwnHotel';
 
 const Hotel = (props: any) => {
+
+  const uniqueId = useId(); 
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   useEffect(() => {
@@ -25,6 +27,7 @@ const Hotel = (props: any) => {
   }, [props])
 
   const [hotel, setHotel] = useState({
+    id: uniqueId,
     checkInDate: "",
     checkInTime:"",
     numberOfNights:"",
@@ -105,17 +108,6 @@ const {
         event.stopPropagation();
       } else {
         props?.getDayHotel([hotel])
-        setHotel({
-          checkInDate: "",
-          checkInTime:"",
-          numberOfNights:"",
-          adults:"",
-          rooms:"",
-          childs:"",
-          extrabed:"",
-          roomTypes:"",
-          noteText:""
-        })
       }
   }
 

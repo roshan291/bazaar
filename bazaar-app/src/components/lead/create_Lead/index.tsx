@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useId} from 'react'
 
 import CustomDropdown from '../../../Utilities/CustomDropdown'
 import CustomDatePicker from '../../../Utilities/CustomDatePicker';
@@ -31,6 +31,7 @@ import { selectCountries } from '../../../constants/countries';
 const CreateLead = () => {
 
 const dispatch = useDispatch();
+const uniqueId = useId(); 
 // const navigate = useNavigate();
 
 const createNewCustomerData = useSelector(
@@ -42,6 +43,7 @@ console.log("createNewCustomerReducer FE lead", createNewCustomerData)
 
 
 const [createLead, setCreateLead] = useState({
+    id: uniqueId,
     leadTitle: "",
     paymentmode: "",
     customerName: "",

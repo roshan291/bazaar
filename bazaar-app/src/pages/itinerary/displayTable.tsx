@@ -46,14 +46,12 @@ const DisplayTable = (props: any) => {
                     <td>{item.customerName}</td>
                     <td>{item.mobileNumber}</td>
                     <td>{item.budgetForTrip}</td>
-                    <td>{item.itineraryStatus === "inProgress" ? "In Progress" : item.itineraryStatus === "new" ? "New" : item.itineraryStatus === "pending" ? "Pending" : item.itineraryStatus === "confirmed" ? "Confirmed" : item.itineraryStatus === "completed" ? "Completed" : "Canceled"}</td>
+                    <td>{item.changestatus === "In process" ? "In Progress" : item.changestatus === "new" ? "New" : item.changestatus === "pending" ? "Pending" : item.changestatus === "confirmed" ? "Confirmed" : item.changestatus === "completed" ? "Completed" : "Canceled"}</td>
                     <td className='itinerary_actin_wrapper'>
                         <FontAwesomeIcon icon={faCopy} />
                         <FontAwesomeIcon icon={faEye} onClick={() => handleView(item)}/>
-                        {/* <FontAwesomeIcon icon={faDownload} onClick = {() => pdfdownload(item)} /> */}
-                        {/* <FontAwesomeIcon icon={faFloppyDisk} /> */}
                         <PDFDownloadLink document={<MyDoc pdfdata = {item} />} fileName={item.itineraryTitle}>
-                            {({ blob, url, loading, error }) =>
+                            {({ loading }) =>
                                 loading ? 'Loading...' : <FontAwesomeIcon icon={faDownload} />
                             }
                         </PDFDownloadLink>

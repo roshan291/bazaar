@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/esm/Col';
@@ -17,6 +17,7 @@ import { selectStatesInIndia } from '../../constants/states';
 import { stateCitiesMap } from '../../constants/cities';
 
 const AddOwnHotel = (props: any) => {
+    const uniqueId = useId(); 
     const [show, setShow] = useState(false);
     const [selectedCitiesFromState, setSelectedCitiesFromState] = useState([] as any)
 
@@ -25,6 +26,7 @@ const AddOwnHotel = (props: any) => {
     }, [props])
 
 const [addOwnHotel, setAddOwnHotel] = useState({
+    id: uniqueId,
     hotelName: "",
     hotelPreferences: "",
     checkInTime: "",

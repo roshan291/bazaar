@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CustomTextInput from './CustomTextInput';
@@ -13,14 +13,16 @@ import CustomNumberInput from './CustomNumberInput';
 import { onKeyPress } from './Utils';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
-import CustomToast from './CustomToast'; 
+import CustomToast from './CustomToast';  
 
 const CreateNewCustomer = (props: any) => {
 
+  const uniqueId = useId();  
   const [loading, setLoading] = React.useState(false)
   const [validated, setValidated] = React.useState(false);
 
   const [createNewCustomer, setCreateNewCustomer ] = React.useState({
+    id: uniqueId,
     customerFirstName: "",
     customerLastName: "",
     customerEmail: "",
@@ -92,6 +94,7 @@ const CreateNewCustomer = (props: any) => {
     setLoading(true) 
   }
 
+  console.log("CreateNewCustomer",createNewCustomer, uniqueId)
   return (
     <>
     <CustomToast showToast = {true} variantType = {true}/>

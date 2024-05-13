@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useId} from 'react'
 import styles from "./create_itinerary.module.css";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -18,7 +18,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faEnvelope, faCircleArrowUp, faTrashCan, faTag, faPlus, faPenToSquare, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useId } from 'react';
 import Meal from '../../../pages/itinerary/meal';
 import Description from '../../../pages/itinerary/description';
 import Transportation from '../../../pages/itinerary/transportation';
@@ -33,6 +32,7 @@ import axios from 'axios';
 import RichTextEditor from '../../../Utilities/CreateRichTextEditor';
 
 const CreateItinerary = () => {
+    const uniqueId = useId(); 
     const [validated, setValidated] = useState(false);
     const [addDayCount, setAddDayCount] = useState(1);
     const [dayWisePlan, setDayWisePlan]= React.useState([] as any)
@@ -49,7 +49,6 @@ const CreateItinerary = () => {
     const [dayMeal, setDayMeal] = React.useState([] as any);
     const [dayTransportation, setDayTransportation] = React.useState([] as any);
     const [dayHotel, setDayHotel] = React.useState([] as any);
-    const id = useId()
 
     const [dayDescriptionSelectedItemID, setDdayDescriptionSelectedItemID] = useState(Number);
     const [dayMealSelectedItemID, setDdayMealSelectedItemID] = useState(Number);
@@ -64,6 +63,7 @@ const CreateItinerary = () => {
     console.log("nextDayData", nextDayData)
 
     const [createItinerary, setCreateItinerary] = useState({
+        id: uniqueId,
         itineraryTitle: "",
         destination: "",
         typeOfHoliday: "",

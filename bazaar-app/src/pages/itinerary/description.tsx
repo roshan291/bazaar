@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState, useId } from 'react' 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/esm/Form';
@@ -9,11 +9,12 @@ import { selectMeal } from '../../constants';
 import Col from 'react-bootstrap/esm/Col'; 
 
 const Description = (props: any) => {
-
+  const uniqueId = useId(); 
   const [show, setShow] = useState(false); 
   const [validated, setValidated] = useState(false);
   
     const [dayDescription, setDayDescription] = useState({
+        id: uniqueId,
         dayTitleText: "",
         dayDescriptionText: "",
     })
@@ -49,7 +50,7 @@ const Description = (props: any) => {
   
         // setDaysList([...daysList, daySelect]);  
         // props?.getnextDayData([...daysList, daySelect]); 
-        setDayDescription({ dayTitleText: "", dayDescriptionText: "" }); 
+        // setDayDescription({ dayTitleText: "", dayDescriptionText: "" }); 
       }
   }
 

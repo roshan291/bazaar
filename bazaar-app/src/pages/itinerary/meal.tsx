@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState, useId } from 'react' 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/esm/Form';
@@ -9,6 +9,7 @@ import { selectMeal } from '../../constants';
 import Col from 'react-bootstrap/esm/Col';
 
 const Meal = (props: any) => {
+    const uniqueId = useId(); 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [validated, setValidated] = useState(false);
@@ -20,6 +21,7 @@ const Meal = (props: any) => {
     // console.log("Meal", props)
 
     const [meal, setMeal] = useState({
+        id: uniqueId,
         mealTitle: "",
         mealDescription: "",
         selecdtMeal: [
@@ -69,16 +71,6 @@ const Meal = (props: any) => {
         event.stopPropagation();
       } else {
         props?.getDayMeal([meal])
-        setMeal({
-          mealTitle: "",
-          mealDescription: "",
-          selecdtMeal: [
-              {id: 1, isChecked: false, selectMealType: "Breakfast"},
-              {id: 2, isChecked: false, selectMealType: "Lunch"},
-              {id: 3, isChecked: false, selectMealType: "Dinner"},
-              {id: 4, isChecked: false, selectMealType: "Evening Snacks"},
-          ],
-        })
       }
     }
     console.log("meal", meal)
